@@ -1,13 +1,6 @@
 class Album {
   Album({this.title, this.artist, this.url, this.image, this.thumbnailImage});
 
-  String title;
-  String artist;
-  String url;
-  String image;
-  String thumbnailImage;
-  int    id = DateTime.now().millisecondsSinceEpoch;
-
   Album.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     artist = json['artist'];
@@ -16,13 +9,21 @@ class Album {
     thumbnailImage = json['thumbnail_image'];
   }
 
+  String title;
+  String artist;
+  String url;
+  String image;
+  String thumbnailImage;
+  //int    id = DateTime.now().millisecondsSinceEpoch;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['title'] = this.title;
-    data['artist'] = this.artist;
-    data['url'] = this.url;
-    data['image'] = this.image;
-    data['thumbnail_image'] = this.thumbnailImage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['artist'] = artist;
+    data['url'] = url;
+    data['image'] = image;
+    data['thumbnail_image'] = thumbnailImage;
+    //data['id'] = this.id;
     return data;
   }
 }
