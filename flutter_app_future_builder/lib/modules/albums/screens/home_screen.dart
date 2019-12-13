@@ -14,6 +14,18 @@ class _AlbumsListScreenState extends State<AlbumsListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Future Builder'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: (){
+              dataStore.deleteAll().then((_){
+                setState(() {
+
+                });
+              });
+            },
+          )
+        ],
       ),
       body: _buildAlbumsList(),
     );
@@ -51,11 +63,24 @@ class _AlbumsListScreenState extends State<AlbumsListScreen> {
           return ListTile(
             title: Text(album.title),
             subtitle: Text(album.artist),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: (){
+                  deleteItemWith(album.title);
+              },
+            ),
             leading: CircleAvatar(
               radius: 30.0,
               child: ClipOval(child: Image.network(album.image)),
             ),
           );
         });
+  }
+
+  void deleteItemWith(String title){
+    dataStore.delete(title).then((_){
+      setState(() {
+      });
+    });
   }
 }

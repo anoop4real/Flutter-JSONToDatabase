@@ -86,13 +86,18 @@ class AlbumsDataStore {
     return List();
   }
 
-  Future<int> delete(int id) async {
+  Future<int> delete(String title) async {
     return await db
-        .delete(tableAlbums, where: '$columnId = ?', whereArgs: <int>[id]);
+        .delete(tableAlbums, where: '$columnId = ?', whereArgs: <String>[title]);
   }
 
   Future<int> update(Album album) async {
     return await db.update(tableAlbums, album.toJson(),
         where: '$columnTitle = ?', whereArgs: <String>[album.title]);
+  }
+
+  Future<int> deleteAll() async {
+    return await db
+        .delete(tableAlbums);
   }
 }
